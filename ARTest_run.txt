@@ -1,1 +1,0 @@
-python3 CameraCalibrator.py --cols 9 --rows 6 --square_size 1.27 --image_dir ./calib_images --save_path ./calibation_results
