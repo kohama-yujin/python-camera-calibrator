@@ -2,7 +2,10 @@
 
 このツールは、PythonのOpenCVを用いてカメラキャリブレーションを行うツールです。  
 キャリブレーションには以下のようなチェスボードを使用します。
-![チェスボード](./input.jpg)
+<p float="left">
+  <img src="./input.jpg" width="40%" />
+  <img src="./output.jpg" width="40%" />
+</p>
 
 ## 環境
 - Windows 11
@@ -55,7 +58,7 @@ python3 CameraCalibrator.py --cols 9 --rows 6 --square_size 1.27 --image_dir ./c
 python3 CameraCalibrator.py -c 9 -r 6 -s 1.27 -i ./calib_images -o ./calibation_results
 ```
 
-#### 2.3 インスタンス化
+### 3. インスタンス化
 このツールはクラス設計されており、以下のように**インスタンス化して使用**することもできます。
 
 ```python
