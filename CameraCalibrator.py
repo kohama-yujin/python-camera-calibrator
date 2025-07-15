@@ -114,7 +114,7 @@ class CameraCalibrator:
         """
         キャリブレーション結果を.datファイルに保存する関数
         Parameters:
-            save_dat_dir: キャリブレーション結果（.datファイル）を保存するパス
+            save_dat_dir: キャリブレーション結果（.datファイル）を保存するフォルダパス
         """
 
         if (
