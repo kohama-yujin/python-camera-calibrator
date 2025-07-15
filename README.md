@@ -54,3 +54,7 @@ python3 CameraCalibrator.py --cols 9 --rows 6 --square_size 1.27 --image_dir ./c
 ```bash
 python3 CameraCalibrator.py -c 9 -r 6 -s 1.27 -i ./calib_images -o ./calibation_results
 ```
+
+## 備考
+### `.dat`の活用方法
+`R.dat`, `t.dat`, `K.dat`は📦[世界座標系の軸の描画ツール]([https://docs.opencv.org](https://github.com/okamoto-fumiya/draw_world_axis?tab=readme-ov-file))で使用できます。
