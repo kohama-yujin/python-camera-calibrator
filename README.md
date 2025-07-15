@@ -31,7 +31,7 @@
 ### 2. 実行
 実行時、以下のようなオプションを設定します。**太字**は必須オプションです。
 
-#### オプション一覧
+#### 2.1 オプション一覧
 | オプション（どちらでも良い） | 説明 |
 | :--- | :--- |
 | **-c, --cols** | **チェスボードの列数**（交点の数） |
@@ -42,37 +42,15 @@
 | --length | 描画する座標軸の長さ（cm）|
 | --thickness | 描画する座標軸の太さ |
 
-[1.キャリブレーションパターンを用意](#1-キャリブレーションパターンを用意)で紹介したチェスボードは`10×7`であるため、`-cols 9 -rows 6`となります。
+[1.キャリブレーションパターンを用意](#1-キャリブレーションパターンを用意)で紹介したチェスボードは、白マスと黒マス合わせて10×7であるため、`-cols 9 -rows 6`となります。
 
 
-#### 実行例
-以下のように実行して、特徴点を画像に描画します。
+#### 2.2 実行例
+以下のように実行して、カメラキャリブレーションを行います。
 ```bash
-python3 main.py -i ./image/sample.png -p ./points_data/sample.dat
+python3 CameraCalibrator.py --cols 9 --rows 6 --square_size 1.27 --image_dir ./calib_images --save_path ./calibation_results
 ```
-半径5pxの青い円を描画したい場合
+※省略オプションver
 ```bash
-python3 main.py -i ./image/sample.png -p ./points_data/sample.dat -r 5px -c blue -s circle
+python3 CameraCalibrator.py -c 9 -r 6 -s 1.27 -i ./calib_images -o ./calibation_results
 ```
-特徴点データの座標が画像の中心を原点としている場合
-```bash
-python3 main.py -i ./image/sample.png -p ./points_data/sample_shift.dat --shift
-```
-## 詳細な設定
-### 優先順位
-色、形状、半径を設定した場合の優先順位は以下のとおりです。
-
-**デフォルトの設定**(`red circle 3px`) < **実行時のオプション設定** < **`.dat`内の設定**
-
-### 色の設定方法
-色は以下の方法で設定できます。
-- 色名（例：`red`, `blue`, `green`）
-- 16進数カラーコード（例：`#FF5733`, `#fff`）
-
-色名は`color_options/colors.dat`にあるものが使用できます。ここに色名を追加すると、追加した色名での設定ができるようになります。
-
-### 形状の設定方法
-設定できる形状は以下の3つです。
-- `circle`：円
-- `square`：正方形
-- `diamond`：ひし形
