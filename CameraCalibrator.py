@@ -47,7 +47,7 @@ class CameraCalibrator:
 
     def calibrate(self):
         """
-        カメラキャリブレーションを実行する関数
+        カメラキャリブレーションを実行する関数（内部パラメータを求める）
         """
 
         # キャリブレーション画像の読み込み
@@ -195,24 +195,31 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Camera Calibration Tool")
     # 以下、必須入力
     parser.add_argument(
-        "--cols", type=int, required=True, help="Number of inner corners (columns)"
+        "-c",
+        "--cols",
+        type=int,
+        required=True,
+        help="Number of inner corners (columns)",
     )
     parser.add_argument(
-        "--rows", type=int, required=True, help="Number of inner corners (rows)"
+        "-r", "--rows", type=int, required=True, help="Number of inner corners (rows)"
     )
     parser.add_argument(
+        "-s",
         "--square_size",
         type=float,
         required=True,
         help="Size of one square (e.g. in cm)",
     )
     parser.add_argument(
+        "-i",
         "--image_dir",
         type=str,
         required=True,
         help="Directory of calibration images",
     )
     parser.add_argument(
+        "-o",
         "--save_dat_dir",
         type=str,
         required=True,
