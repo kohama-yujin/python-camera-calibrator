@@ -3,8 +3,8 @@
 このツールは、PythonのOpenCVを用いてカメラキャリブレーションを行うツールです。  
 キャリブレーションには以下のようなチェスボードを使用します。
 <p float="left">
-  <img src="./input.jpg" width="40%" />
-  <img src="./output.jpg" width="40%" />
+  <img src="./input.jpg" width="45%" />
+  <img src="./output.jpg" width="45%" />
 </p>
 
 ## 環境
