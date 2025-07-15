@@ -5,7 +5,7 @@
 ![チェスボード](./input.jpg)
 
 ## 環境
-- Windows11
+- Windows 11
 - Python 3.11.9
 - NumPy 2.3.1
 - OpenCV 4.11.0.86
@@ -18,7 +18,7 @@
 - 座標軸の描画
   
 ## 使用方法
-### 1. キャリブレーションパターンを用意
+### 1. キャリブレーション画像を用意
 以下のようなキャリブレーションパターンの画像を10枚から20枚程度、用意します。  
 正確なキャリブレーションを行うためには、様々な角度や距離からパターンを撮影することが推奨されます。﻿
 
@@ -48,11 +48,48 @@
 #### 2.2 実行例
 以下のように実行して、カメラキャリブレーションを行います。
 ```bash
-python3 CameraCalibrator.py --cols 9 --rows 6 --square_size 1.27 --image_dir ./calib_images --save_path ./calibation_results
+python3 CameraCalibrator.py --cols 9 --rows 6 --square_size 1.27 --image_dir ./calib_images --save_dat_dir ./calibation_results
 ```
 ※省略オプションver
 ```bash
 python3 CameraCalibrator.py -c 9 -r 6 -s 1.27 -i ./calib_images -o ./calibation_results
+```
+
+#### 2.3 インスタンス化
+このツールはクラス設計されており、以下のように**インスタンス化して使用**することもできます。
+
+```python
+# 以下、CameraCalibrator.pyと同じ階層で実行する場合
+import CameraCalibrator
+
+# 1. インスタンス生成
+calibrator = CameraCalibrator(
+    cols=9,
+    rows=6,
+    square_size=1.27,
+    image_dir="./calib_images",
+)
+
+# 2. キャリブレーション実行
+calibrator.calibrate()
+print("カメラ内部パラメータ:\n", calibrator.camera_matrix)
+print("歪み係数:\n", calibrator.dist_coeffs)
+
+# 3. 姿勢推定
+img = cv2.imread("./input.jpg")
+calibrator.estimate_pose(img)
+print("回転ベクトル (rvec):\n", calibrator.rvec)
+print("並進ベクトル (tvec):\n", calibrator.tvec)
+print("回転行列 (R):\n", calibrator.R)
+
+# 4. キャリブレーション結果を.datファイルに保存
+calibrator.save_dat("./calibration_results")
+
+# 5. 座標軸描画（estimate_pose()で使用した画像に描画）
+ret, img = calibrator.draw_axis()
+if ret:
+    cv2.imshow("Axis", img)
+    cv2.waitKey(0)
 ```
 
 ## 備考
