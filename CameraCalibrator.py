@@ -137,7 +137,7 @@ class CameraCalibrator:
                 np.savetxt(f, self.tvec, fmt="%.6f")
                 print("並進ベクトルを保存しました:", dat_path)
 
-    def draw_axis(self, length=5.0, thickness=2):
+    def draw_axis(self, length=3.0, thickness=3):
         """
         カメラ座標系における座標軸 (X:赤, Y:緑, Z:青) を描画する
         Parameters:
@@ -230,13 +230,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--length",
         type=float,
-        default=5.0,
+        default=3.0,
         help="Length of the axis to draw (default: 5.0 cm)",
     )
     parser.add_argument(
         "--thickness",
         type=int,
-        default=2,
+        default=3,
         help="Thickness of the axis lines (default: 2)",
     )
 
@@ -265,8 +265,7 @@ if __name__ == "__main__":
     # キャリブレーション結果を.datファイルに保存
     calibrator.save_dat(args.save_dat_dir)
 
-    # 座標軸を描画して表示
+    # 座標軸を描画して保存
     ret, img = calibrator.draw_axis(args.length, args.thickness)
     if ret:
-        cv2.imshow("Axis", img)
-        cv2.waitKey(0)
+        cv2.imwrite("./output.jpg", img)
